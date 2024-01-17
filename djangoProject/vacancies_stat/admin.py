@@ -4,3 +4,4 @@ from vacancies_stat.models import *
 admin.site.register(Person)
 admin.site.register(Vacancy)
 admin.site.register(Currency)
+admin.site.register(FormedVacancy)

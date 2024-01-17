@@ -45,3 +45,13 @@ class Currency(models.Model):
     class Meta:
         verbose_name = "Валюта"
         verbose_name_plural = "Валюты"
+
+class FormedVacancy(models.Model):
+    name = models.CharField("Название", max_length=256)
+    area_name = models.CharField("Город", max_length=128)
+    salary = models.DecimalField("Зарплата", max_digits=16, decimal_places=1, null=True)
+    date = models.CharField("Дата публикации", max_length=10, null=True)
+
+    class Meta:
+        verbose_name = "Форматированная вакансия"
+        verbose_name_plural = "Форматированные вакансии"
