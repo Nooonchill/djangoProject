@@ -12,3 +12,36 @@ class Person(models.Model):
     class Meta:
         verbose_name = "Человек"
         verbose_name_plural = "Люди"
+
+
+class Vacancy(models.Model):
+    name = models.CharField("Название", max_length=256)
+    key_skills = models.CharField("Навыки", max_length=256)
+    salary_from = models.DecimalField("Зарплата от", max_digits=16, decimal_places=1)
+    salary_to = models.DecimalField("Зарплата до", max_digits=16, decimal_places=1)
+    salary_currency = models.CharField("Валюта", max_length=4)
+    area_name = models.CharField("Город", max_length=128)
+    published_at = models.DateTimeField("Дата и время публикации")
+    salary = models.DecimalField("Зарплата", max_digits=16, decimal_places=1, null=True)
+    date = models.DateTimeField("Дата публикации", null=True)
+
+    class Meta:
+        verbose_name = "Вакансия"
+        verbose_name_plural = "Вакансии"
+
+
+class Currency(models.Model):
+    date = models.CharField("Дата", primary_key = True, max_length=7)
+    USD = models.CharField("USD", max_length=3, null=True)
+    BYR = models.CharField("BYR", max_length=3, null=True)
+    EUR = models.CharField("EUR", max_length=3, null=True)
+    KZT = models.CharField("KZT", max_length=3, null=True)
+    UAH = models.CharField("UAH", max_length=3, null=True)
+    AZN = models.CharField("AZN", max_length=3, null=True)
+    KGS = models.CharField("KGS", max_length=3, null=True)
+    UZS = models.CharField("UZS", max_length=3, null=True)
+    GEL = models.CharField("GEL", max_length=3, null=True)
+
+    class Meta:
+        verbose_name = "Валюта"
+        verbose_name_plural = "Валюты"
