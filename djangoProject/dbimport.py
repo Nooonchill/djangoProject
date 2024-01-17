@@ -9,4 +9,3 @@ df = df.assign(
 	date=df['published_at'].apply(lambda x: x[:7]))
 
 df.to_sql('vacancies_stat_vacancy', conn, if_exists='append')
-print()
