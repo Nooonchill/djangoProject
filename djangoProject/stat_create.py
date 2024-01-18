@@ -1,7 +1,8 @@
 import sqlite3
 import pandas as pd
 import matplotlib.pyplot as plt
-
+from io import StringIO
+import numpy as np
 
 def format_pd(df, vac=""):
     vacancies = (df
@@ -18,7 +19,8 @@ def count_salary_avg(vacancies, key='year'):
             .groupby(key)
             .mean()
     )
-    vacancies_salary_avg = vacancies_salary_avg['salary'].apply(lambda x: round(x)).to_dict()
+    vacancies_salary_avg = vacancies_salary_avg.loc[vacancies_salary_avg['salary'] <= 10000000]
+    vacancies_salary_avg = vacancies_salary_avg['salary'].apply(lambda x: round(x) if str(x)!='None' else None).to_dict()
     return vacancies_salary_avg
 
 
@@ -85,7 +87,7 @@ def correct_dic(dic):
     return corrected_dic
 
 def create_plot():
-    vac = 'Программист'
+    vac = 'c#'
     conn = sqlite3.connect('db.sqlite3')
     df = pd.read_sql('SELECT * FROM vacancies_stat_formedvacancy', conn, index_col='id')
     vacancies, vacancies_prof = format_pd(df, vac)
@@ -136,8 +138,21 @@ def create_plot():
 
     sub[1,1].pie(list(sorted_dict.values()), labels=list(sorted_dict.keys()), textprops={'fontsize': 6})
     sub[1,1].set_title('Доля ваканский по городам')
-    plt.show()
-    return sub
 
+    imgdata = StringIO()
+    fig.savefig(imgdata, format='svg')
+    imgdata.seek(0)
+    data = imgdata.getvalue()
+    return data
 
-create_plot()
+conn = sqlite3.connect('db.sqlite3')
+df = pd.read_sql('SELECT * FROM vacancies_stat_formedvacancy', conn, index_col='id')
+vacancies, vacancies_prof = format_pd(df, 'c#')
+print(pd.DataFrame({'salary_avg': count_salary_avg(vacancies),
+                    'vacancies_amount': count_vacancies_amount(vacancies),
+                    'salary_avg_prof': count_salary_avg(vacancies_prof),
+                    'vacancies_amount_prof': count_vacancies_amount(vacancies_prof)}))
+print(pd.DataFrame({'salary_avg': count_salary_avg(vacancies, key='area_name'),
+                    'vacancies_amount': count_vacancies_amount(vacancies, key='area_name'),
+                    'salary_avg_prof': count_salary_avg(vacancies_prof, key='area_name'),
+                    'vacancies_amount_prof': count_vacancies_amount(vacancies_prof, key='area_name')}))
