@@ -9,14 +9,20 @@ def draw_salary_avg_year(stats, is_prof=False):
     else:
         values = [float(stats[i].salary_avg) for i in range(len(stats))]
     plt.rcParams.update({'font.size': 8})
-    plt.bar(years, values, label='средняя з/п' + (int(is_prof)*' C#') )
+    fig, ax = plt.subplots()
+    ax.bar(years, values, label='средняя з/п' + (int(is_prof)*' C#') )
 
-    plt.title('Уровень зарплат по годам' + (int(is_prof)*'для профессии C#'))
-    plt.legend()
-    plt.grid(axis='y')
-    plt.xticks([float(stats[i].year) for i in range(len(stats))], rotation=90)
+    ax.set_title('Уровень зарплат по годам' + (int(is_prof)*' для профессии C#'))
+    ax.legend()
+    ax.grid(axis='y')
+    ax.set_xticks(years)
+    ax.set_xticklabels(years, rotation=90)
     imgdata = StringIO()
-    plt.savefig(imgdata, format='svg')
+    fig.savefig(imgdata, format='svg')
     imgdata.seek(0)
     data = imgdata.getvalue()
     return data
+
+
+def draw_vacancy_amount_graph():
+    pass
