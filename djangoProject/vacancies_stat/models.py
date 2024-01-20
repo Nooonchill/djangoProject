@@ -1,18 +1,5 @@
 from django.db import models
 
-class Person(models.Model):
-    first_name = models.CharField("Имя", max_length=64)
-    last_name = models.CharField("Фамилия", max_length=64)
-    age = models.IntegerField("Возраст")
-    job = models.CharField("Должность", max_length=64)
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
-    class Meta:
-        verbose_name = "Человек"
-        verbose_name_plural = "Люди"
-
 
 class Vacancy(models.Model):
     name = models.CharField("Название", max_length=256)
@@ -24,6 +11,9 @@ class Vacancy(models.Model):
     published_at = models.DateTimeField("Дата и время публикации")
     salary = models.DecimalField("Зарплата", max_digits=16, decimal_places=1, null=True)
     date = models.DateTimeField("Дата публикации", null=True)
+
+    def __str__(self):
+        return f"Вакансия {self.name}"
 
     class Meta:
         verbose_name = "Вакансия"
@@ -42,6 +32,9 @@ class Currency(models.Model):
     UZS = models.CharField("UZS", max_length=3, null=True)
     GEL = models.CharField("GEL", max_length=3, null=True)
 
+    def __str__(self):
+        return f"Курс валют за {self.date}"
+
     class Meta:
         verbose_name = "Валюта"
         verbose_name_plural = "Валюты"
@@ -51,6 +44,9 @@ class FormedVacancy(models.Model):
     area_name = models.CharField("Город", max_length=128)
     salary = models.DecimalField("Зарплата", max_digits=16, decimal_places=1, null=True)
     date = models.CharField("Дата публикации", max_length=10, null=True)
+
+    def __str__(self):
+        return f"Вакансия {self.name}"
 
     class Meta:
         verbose_name = "Форматированная вакансия"
@@ -63,13 +59,19 @@ class StatByYear(models.Model):
     salary_avg_prof = models.DecimalField('Средняя з/п C#', max_digits=16, decimal_places=1)
     vacancies_amount_prof = models.IntegerField('Количество вакансий C#')
 
+    def __str__(self):
+        return f"Статистика по {self.year} году"
+
     class Meta:
         verbose_name = "Годовая статистика"
         verbose_name_plural = "Статистика по годам"
 
 class StatByArea(models.Model):
-    area = models.CharField("Город", max_length=128, primary_key=True)
+    area_name = models.CharField("Город", max_length=128, primary_key=True)
     salary_avg = models.DecimalField("Средняя з/п ", max_digits=16, decimal_places=1, null=True)
     vacancies_percent = models.DecimalField('Доля вакансий', max_digits=4, decimal_places=3)
     salary_avg_prof = models.DecimalField("Средняя з/п С#", max_digits=16, decimal_places=1, null=True)
     vacancies_percent_prof = models.DecimalField("Доля вакансий С#", max_digits=16, decimal_places=1, null=True)
+
+    def __str__(self):
+        return f"Статистика по городу {self.area_name}"

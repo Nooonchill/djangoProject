@@ -5,6 +5,22 @@
 	</head>
 	
 	<body>
-        {{ graph |safe }}
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Год</th>
+					<th>Количество вакансий</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for stat in stats %}
+					<tr>
+						<td>{{ stat.year }}</td>
+						<td>{{ stat.salary_avg }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</body>
+	{{graph | safe }}
 </html>
