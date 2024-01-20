@@ -97,11 +97,11 @@ class SalaryAvgAreaProfTop10(models.Model):
     salary_avg_prof = models.DecimalField("Средняя з/п ", max_digits=16, decimal_places=1)
 
     def __str__(self):
-        return f"Статистика по городу {self.area_name} по профессии c#"
+        return f"Статистика по городу {self.area_name} для профессии c#"
 
     class Meta:
-        verbose_name = "Статистика по городу по профессии c#"
-        verbose_name_plural = "Статистика по лучшим городам по профессии c#"
+        verbose_name = "Статистика по городу для профессии c#"
+        verbose_name_plural = "Статистика по лучшим городам для профессии c#"
 
 
 class VacanciesPercentAreaTop10(models.Model):
@@ -121,8 +121,8 @@ class VacanciesPercentAreaProfTop10(models.Model):
     vacancies_percent_prof = models.DecimalField('Доля вакансий', max_digits=4, decimal_places=3)
 
     def __str__(self):
-        return f"Доля вакансий в {self.area_name} по профессии c#"
+        return f"Доля вакансий в {self.area_name} для профессии c#"
 
     class Meta:
-        verbose_name = "Доля вакансий в городе по профессии c#"
-        verbose_name_plural = "Доли вакансий в городах по профессии c#"
+        verbose_name = "Доля вакансий в городе для профессии c#"
+        verbose_name_plural = "Доли вакансий в городах для профессии c#"

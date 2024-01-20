@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Hello</title>
+	</head>
+
+	<body>
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Город</th>
+						<th>Средняя з/п</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for stat in salary_avg_area_stat %}
+						<tr>
+							<td>{{ stat.area_name }}</td>
+							<td>{{ stat.salary_avg }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{{salary_avg_area_graph | safe }}
+		</div>
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Город</th>
+						<th>Средняя з/п</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for stat in salary_avg_area_prof_stat %}
+						<tr>
+							<td>{{ stat.area_name }}</td>
+							<td>{{ stat.salary_avg_prof }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{{salary_avg_area_prof_graph | safe }}
+		</div>
+
+----------------------
+
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Город</th>
+						<th>Средняя з/п</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for stat in vacancies_percent_area_stat %}
+						<tr>
+							<td>{{ stat.area_name }}</td>
+							<td>{{ stat.vacancies_percent }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{{vacancies_percent_area_graph | safe }}
+		</div>
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Город</th>
+						<th>Средняя з/п</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for stat in vacancies_percent_area_prof_stat %}
+						<tr>
+							<td>{{ stat.area_name }}</td>
+							<td>{{ stat.vacancies_percent_prof }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{{vacancies_percent_area_prof_graph | safe }}
+		</div>
+	</body>
+
+</html>
