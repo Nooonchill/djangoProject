@@ -29,7 +29,7 @@
 				<thead>
 					<tr>
 						<th>Год</th>
-						<th>Средняя з/п для профессии c#</th>
+						<th>Средняя з/п профессии c#</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,6 +42,44 @@
 				</tbody>
 			</table>
 			{{salary_avg_year_prof_graph | safe }}
+		</div>
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Год</th>
+						<th>Количество вакансий</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for stat in stats %}
+						<tr>
+							<td>{{ stat.year }}</td>
+							<td>{{ stat.vacancies_amount }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{{vacancies_amount_graph | safe }}
+		</div>
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Год</th>
+						<th>Количество вакансий профессии c#</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for stat in stats %}
+						<tr>
+							<td>{{ stat.year }}</td>
+							<td>{{ stat.vacancies_amount_prof }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{{vacancies_amount_prof_graph | safe }}
 		</div>
 	</body>
 

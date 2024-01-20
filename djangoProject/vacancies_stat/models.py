@@ -75,3 +75,54 @@ class StatByArea(models.Model):
 
     def __str__(self):
         return f"Статистика по городу {self.area_name}"
+
+    class Meta:
+        verbose_name = "Статистика по городу"
+        verbose_name_plural = "Статистика по городам"
+
+
+class SalaryAvgAreaTop10(models.Model):
+    area_name = models.CharField("Город", max_length=128, primary_key=True)
+    salary_avg = models.DecimalField("Средняя з/п ", max_digits=16, decimal_places=1)
+
+    def __str__(self):
+        return f"Статистика по городу {self.area_name}"
+
+    class Meta:
+        verbose_name = "Статистика по городу"
+        verbose_name_plural = "Статистика по лучшим городам"
+
+class SalaryAvgAreaProfTop10(models.Model):
+    area_name = models.CharField("Город", max_length=128, primary_key=True)
+    salary_avg = models.DecimalField("Средняя з/п ", max_digits=16, decimal_places=1)
+
+    def __str__(self):
+        return f"Статистика по городу {self.area_name} по профессии c#"
+
+    class Meta:
+        verbose_name = "Статистика по городу по профессии c#"
+        verbose_name_plural = "Статистика по лучшим городам по профессии c#"
+
+
+class VacanciesPercentAreaTop10(models.Model):
+    area_name = models.CharField("Город", max_length=128, primary_key=True)
+    vacancies_percent = models.DecimalField('Доля вакансий', max_digits=4, decimal_places=3)
+
+    def __str__(self):
+        return f"Доля вакансий в {self.area_name}"
+
+    class Meta:
+        verbose_name = "Доля вакансий в городе"
+        verbose_name_plural = "Доли вакансий в городах"
+
+
+class VacanciesPercentAreaProfTop10(models.Model):
+    area_name = models.CharField("Город", max_length=128, primary_key=True)
+    vacancies_percent = models.DecimalField('Доля вакансий', max_digits=4, decimal_places=3)
+
+    def __str__(self):
+        return f"Доля вакансий в {self.area_name} по профессии c#"
+
+    class Meta:
+        verbose_name = "Доля вакансий в городе по профессии c#"
+        verbose_name_plural = "Доли вакансий в городах по профессии c#"
