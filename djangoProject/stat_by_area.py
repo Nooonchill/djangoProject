@@ -30,15 +30,4 @@ stat_by_area = {'salary_avg': count_salary_cities(vacancies),
 stat_by_area = pd.DataFrame(stat_by_area)
 stat_by_area.index.rename('area_name', inplace=True)
 stat_by_area.to_sql('vacancies_stat_statbyarea', conn, if_exists='append')
-salary_avg_for_graph = (stat_by_area[stat_by_area['vacancies_percent'] > 0.01]
-                        .sort_values('salary_avg', ascending=False)
-                        [['vacancies_percent']]
-                        .head(10))
-salary_avg_for_graph.loc['Другие'] = 1- sum(salary_avg_for_graph['vacancies_percent'].values)
-salary_avg_for_graph.to_sql('salary_avg_for_graph', conn, if_exists='append')
-salary_avg_prof_for_graph = (stat_by_area[stat_by_area['vacancies_percent_prof'] > 0.01]
-                             .sort_values('salary_avg_prof', ascending=False)
-                             [['vacancies_percent_prof']]
-                             .head(10))
-salary_avg_prof_for_graph.loc['Другие'] = 1- sum(salary_avg_prof_for_graph['vacancies_percent_prof'].values)
-salary_avg_prof_for_graph.to_sql('salary_avg_prof_for_graph', conn, if_exists='append')
+
