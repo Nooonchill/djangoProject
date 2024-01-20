@@ -5,22 +5,46 @@
 	</head>
 	
 	<body>
-		<table border="1">
-			<thead>
-				<tr>
-					<th>Год</th>
-					<th>Количество вакансий</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for stat in stats %}
+		<div>
+			<table border="1">
+				<thead>
 					<tr>
-						<td>{{ stat.year }}</td>
-						<td>{{ stat.salary_avg }}</td>
+						<th>Год</th>
+						<th>Средняя з/п</th>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{% for stat in stats %}
+						<tr>
+							<td>{{ stat.year }}</td>
+							<td>{{ stat.salary_avg }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{{salary_avg_year_graph | safe }}
+		</div>
+		<div>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Год</th>
+						<th>Средняя з/п для профессии c#</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for stat in stats %}
+						<tr>
+							<td>{{ stat.year }}</td>
+							<td>{{ stat.salary_avg_prof }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{{salary_avg_year_prof_graph | safe }}
+		</div>
 	</body>
-	{{graph | safe }}
+
+	{{salary_avg_year_prof_graph | safe}
+
 </html>
