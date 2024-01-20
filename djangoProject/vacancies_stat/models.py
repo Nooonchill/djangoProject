@@ -94,7 +94,7 @@ class SalaryAvgAreaTop10(models.Model):
 
 class SalaryAvgAreaProfTop10(models.Model):
     area_name = models.CharField("Город", max_length=128, primary_key=True)
-    salary_avg = models.DecimalField("Средняя з/п ", max_digits=16, decimal_places=1)
+    salary_avg_prof = models.DecimalField("Средняя з/п ", max_digits=16, decimal_places=1)
 
     def __str__(self):
         return f"Статистика по городу {self.area_name} по профессии c#"
@@ -118,7 +118,7 @@ class VacanciesPercentAreaTop10(models.Model):
 
 class VacanciesPercentAreaProfTop10(models.Model):
     area_name = models.CharField("Город", max_length=128, primary_key=True)
-    vacancies_percent = models.DecimalField('Доля вакансий', max_digits=4, decimal_places=3)
+    vacancies_percent_prof = models.DecimalField('Доля вакансий', max_digits=4, decimal_places=3)
 
     def __str__(self):
         return f"Доля вакансий в {self.area_name} по профессии c#"
