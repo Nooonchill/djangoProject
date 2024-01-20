@@ -55,3 +55,8 @@ class FormedVacancy(models.Model):
     class Meta:
         verbose_name = "Форматированная вакансия"
         verbose_name_plural = "Форматированные вакансии"
+
+class StatByYear(models.Model):
+    salary_avg = models.DecimalField('Средняя з/п', max_digits=16, decimal_places=1)
+    vacancies_amount = models.IntegerField('Количество вакансий')
+    salary_avg_prof = models.DecimalField('Средняя з/п ', max_digits=16, decimal_places=1)

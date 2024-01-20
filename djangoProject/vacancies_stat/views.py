@@ -5,5 +5,5 @@ from vacancies_stat.models import Person
 from stat_former import create_plot
 
 def index_page(request):
-
-    return render(request, 'index.html', context={"graph": create_plot()})
+    pass
+    #return render(request, 'index.html', context={"graph": create_plot()})

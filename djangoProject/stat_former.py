@@ -49,16 +49,7 @@ def count_salary_cities(vacancies):
                              .apply(lambda x: round(x) if str(x)!='nan' else None))
     return salary_city['salary'].to_dict()
 
-
-def correct_dic(dic):
-    corrected_dic = {}
-    for year in range(2003, 2024):
-        if year not in dic.keys():
-            corrected_dic[year] = 0
-        else:
-            corrected_dic[year] = dic[year]
-    return corrected_dic
-
+"""
 def create_plot():
     conn = sqlite3.connect('db.sqlite3')
     df = pd.read_sql('SELECT * FROM vacancies_stat_formedvacancy', conn, index_col='id')
@@ -119,5 +110,22 @@ def create_plot():
     imgdata.seek(0)
     data = imgdata.getvalue()
     return data
+"""
 
-create_plot()
+conn = sqlite3.connect('db.sqlite3')
+df = pd.read_sql('SELECT * FROM vacancies_stat_formedvacancy LIMIT 1000', conn, index_col='id')
+vacancies, vacancies_prof = format_pd(df, 'c#')
+stat_by_year = {'salary_avg': count_salary_avg(vacancies),
+              'vacancies_amount': count_vacancies_amount(vacancies),
+              'salary_avg_prof': count_salary_avg(vacancies_prof),
+              'vacancies_amount_prof': count_vacancies_amount(vacancies_prof)}
+print(stat_by_year)
+stat_by_year = pd.DataFrame(stat_by_year)
+cities_stat = {'salary_avg': count_salary_cities(vacancies),
+               'vacancies_amount': format_vacancy_percent(vacancies),
+               'salary_avg_prof': count_salary_cities(vacancies_prof),
+               'vacancies_amount_prof': format_vacancy_percent(vacancies_prof)}
+print(cities_stat)
+cities_stat = pd.DataFrame(cities_stat)
+cities_stat = cities_stat.sort_values('salary_avg', ascending=False)
+print(cities_stat[['salary_avg', 'vacancies_amount']])
