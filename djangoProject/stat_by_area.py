@@ -20,18 +20,24 @@ def count_salary_cities(vacancies):
 
 
 conn = sqlite3.connect('db.sqlite3')
-df = pd.read_sql('SELECT * FROM vacancies_stat_formedvacancy', conn, index_col='id')
-vacancies = (df
-             .assign(year=(df['date'].str[:4]))
-             )
-vacancies['year'] = vacancies['year'].apply(lambda x: int(x))
+vacancies = pd.read_sql('SELECT * FROM vacancies_stat_formedvacancy', conn, index_col='id')
 vacancies_prof = vacancies[vacancies['name'].str.contains('c#|c sharp|шарп|с#', case=False)]
 
-cities_stat = {'salary_avg': count_salary_cities(vacancies),
+stat_by_area = {'salary_avg': count_salary_cities(vacancies),
                'vacancies_percent': format_vacancy_percent(vacancies),
                'salary_avg_prof': count_salary_cities(vacancies_prof),
                'vacancies_percent_prof': format_vacancy_percent(vacancies_prof)}
-print(cities_stat)
-cities_stat = pd.DataFrame(cities_stat)
-cities_stat = cities_stat.sort_values('salary_avg', ascending=False)
-print(cities_stat[cities_stat['vacancies_percent'] > 0.01][['salary_avg', 'vacancies_percent']])
+stat_by_area = pd.DataFrame(stat_by_area)
+stat_by_area.index.rename('area_name', inplace=True)
+salary_avg_for_graph = (stat_by_area[stat_by_area['vacancies_percent'] > 0.01]
+                        .sort_values('salary_avg', ascending=False)
+                        [['vacancies_percent']]
+                        .head(10))
+salary_avg_for_graph.loc['Другие'] = 1- sum(salary_avg_for_graph['vacancies_percent'].values)
+print(salary_avg_for_graph)
+salary_avg_prof_for_graph = (stat_by_area[stat_by_area['vacancies_percent_prof'] > 0.01]
+                             .sort_values('salary_avg_prof', ascending=False)
+                             [['vacancies_percent_prof']]
+                             .head(10))
+salary_avg_prof_for_graph.loc['Другие'] = 1- sum(salary_avg_prof_for_graph['vacancies_percent_prof'].values)
+print(salary_avg_prof_for_graph)

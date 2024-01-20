@@ -57,6 +57,19 @@ class FormedVacancy(models.Model):
         verbose_name_plural = "Форматированные вакансии"
 
 class StatByYear(models.Model):
+    year = models.IntegerField('Год', primary_key=True, default=0)
     salary_avg = models.DecimalField('Средняя з/п', max_digits=16, decimal_places=1)
     vacancies_amount = models.IntegerField('Количество вакансий')
-    salary_avg_prof = models.DecimalField('Средняя з/п ', max_digits=16, decimal_places=1)
+    salary_avg_prof = models.DecimalField('Средняя з/п C#', max_digits=16, decimal_places=1)
+    vacancies_amount_prof = models.IntegerField('Количество вакансий C#')
+
+    class Meta:
+        verbose_name = "Годовая статистика"
+        verbose_name_plural = "Статистика по годам"
+
+class StatByArea(models.Model):
+    area = models.CharField("Город", max_length=128, primary_key=True)
+    salary_avg = models.DecimalField("Средняя з/п ", max_digits=16, decimal_places=1, null=True)
+    vacancies_percent = models.DecimalField('Доля вакансий', max_digits=4, decimal_places=3)
+    salary_avg_prof = models.DecimalField("Средняя з/п С#", max_digits=16, decimal_places=1, null=True)
+    vacancies_percent_prof = models.DecimalField("Доля вакансий С#", max_digits=16, decimal_places=1, null=True)

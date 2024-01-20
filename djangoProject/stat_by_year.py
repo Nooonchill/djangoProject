@@ -14,7 +14,7 @@ def count_salary_avg(vacancies, key='year'):
 
 
 conn = sqlite3.connect('db.sqlite3')
-df = pd.read_sql('SELECT * FROM vacancies_stat_formedvacancy LIMIT 100000', conn, index_col='id')
+df = pd.read_sql('SELECT * FROM vacancies_stat_formedvacancy', conn, index_col='id')
 vacancies = (df
              .assign(year=(df['date'].str[:4]))
              )
@@ -27,5 +27,6 @@ stat_by_year = {'salary_avg': count_salary_avg(vacancies),
                 'vacancies_amount_prof': vacancies_prof['year'].value_counts().sort_index().to_dict()}
 print(stat_by_year)
 stat_by_year = pd.DataFrame(stat_by_year)
+stat_by_year.index.rename('year', inplace=True)
 print(stat_by_year)
-
+stat_by_year.to_sql('vacancies_stat_statbyyear', conn, if_exists='append')
