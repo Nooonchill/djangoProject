@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        {% load static %}
+        <link rel ="stylesheet" href = "{% static 'css/normalize.css' %}">
+        <link rel ="stylesheet" href = "{% static 'css/style.css' %}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Последние вакансии</title>
+    </head>
+    <body>
+        <header class = "header">
+            <div class = "logo container">
+                <img src = "{% static 'img/logo.svg' %}">
+                <p>NoSleep</p>
+            </div>
+
+            <nav>
+              <ul class="menu">
+                <li><a href="{% url 'index_page' %}">Главная</a></li>
+                <li><a href="{% url 'demand_page' %}">Востребованность</a></li>
+                <li><a href="{% url 'geography_page' %}">География</a></li>
+                <li><a href="{% url 'skills_page' %}">Навыки</a></li>
+              </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="empty">
+                <h2>Информация по сегменту "Последние вакансии" отсутствует</h2>
+            </section>
+            <footer class = "footer">
+                <div class = "container footer-element">
+                    <p class = "footer-txt">
+                        Горский Иван Артёмович РИ-220911
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </body>
+</html>

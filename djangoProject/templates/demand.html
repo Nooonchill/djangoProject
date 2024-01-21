@@ -1,85 +1,126 @@
-<!doctype html>
-<html>
-	<head>
-		<title>Hello</title>
-	</head>
-	<body>
-		<div>
-			<table border="1">
-				<thead>
-					<tr>
-						<th>Год</th>
-						<th>Средняя з/п</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for stat in stats %}
-						<tr>
-							<td>{{ stat.year }}</td>
-							<td>{{ stat.salary_avg }}</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			{{salary_avg_year_graph | safe }}
-		</div>
-		<div>
-			<table border="1">
-				<thead>
-					<tr>
-						<th>Год</th>
-						<th>Средняя з/п профессии c#</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for stat in stats %}
-						<tr>
-							<td>{{ stat.year }}</td>
-							<td>{{ stat.salary_avg_prof }}</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			{{salary_avg_year_prof_graph | safe }}
-		</div>
-		<div>
-			<table border="1">
-				<thead>
-					<tr>
-						<th>Год</th>
-						<th>Количество вакансий</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for stat in stats %}
-						<tr>
-							<td>{{ stat.year }}</td>
-							<td>{{ stat.vacancies_amount }}</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			{{vacancies_amount_graph | safe }}
-		</div>
-		<div>
-			<table border="1">
-				<thead>
-					<tr>
-						<th>Год</th>
-						<th>Количество вакансий профессии c#</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for stat in stats %}
-						<tr>
-							<td>{{ stat.year }}</td>
-							<td>{{ stat.vacancies_amount_prof }}</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			{{vacancies_amount_prof_graph | safe }}
-		</div>
-	</body>
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        {% load static %}
+        <link rel ="stylesheet" href = "{% static 'css/normalize.css' %}">
+        <link rel ="stylesheet" href = "{% static 'css/style.css' %}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Востребованность</title>
+    </head>
+    <body>
+        <header class = "header">
+            <div class = "logo container">
+                <img src = "{% static 'img/logo.svg' %}">
+                <p>NoSleep</p>
+            </div>
 
+            <nav>
+              <ul class="menu">
+                <li><a href="{% url 'index_page' %}">Главная</a></li>
+                <li><a href="{% url 'geography_page' %}">География</a></li>
+                <li><a href="{% url 'skills_page' %}">Навыки</a></li>
+                <li><a href="{% url 'last_vacs_page' %}">Последние вакансии</a></li>
+              </ul>
+            </nav>
+        </header>
+        <main>
+			<section class="third-sec pre-data container">
+                <h2>Динамика уровня зарплат по годам</h2>
+            </section>
+            <div class="table container">
+				<table border="1">
+					<thead>
+						<tr>
+							<th>Год</th>
+							<th>Средняя з/п</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for stat in stats %}
+							<tr>
+								<td>{{ stat.year }}</td>
+								<td>{{ stat.salary_avg }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				{{salary_avg_year_graph | safe }}
+			</div>
+			<section class="third-sec pre-data container">
+                <h2>Динамика уровня зарплат по годам для вакансий С#</h2>
+            </section>
+			<div class="table container">
+				<table border="1">
+					<thead>
+						<tr>
+							<th>Год</th>
+							<th>Средняя з/п профессии c#</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for stat in stats %}
+							<tr>
+								<td>{{ stat.year }}</td>
+								<td>{{ stat.salary_avg_prof }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				{{salary_avg_year_prof_graph | safe }}
+			</div>
+			<section class="third-sec pre-data container">
+                <h2>Динамика количества вакансий по годам</h2>
+            </section>
+			<div class="table container">
+				<table border="1">
+					<thead>
+						<tr>
+							<th>Год</th>
+							<th>Количество вакансий</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for stat in stats %}
+							<tr>
+								<td>{{ stat.year }}</td>
+								<td>{{ stat.vacancies_amount }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				{{vacancies_amount_graph | safe }}
+			</div>
+			<section class="third-sec pre-data container">
+                <h2>Динамика количества вакансий по годам для вакансий С#</h2>
+            </section>
+			<div class="table container">
+				<table border="1">
+					<thead>
+						<tr>
+							<th>Год</th>
+							<th>Количество вакансий профессии c#</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for stat in stats %}
+							<tr>
+								<td>{{ stat.year }}</td>
+								<td>{{ stat.vacancies_amount_prof }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				{{vacancies_amount_prof_graph | safe }}
+		    </div>
+			<div class="white"></div>
+            <footer class = "footer">
+                <div class = "container footer-element">
+                    <p class = "footer-txt">
+                        Горский Иван Артёмович РИ-220911
+                    </p>
+                </div>
+            </footer>
+        </main>
+    </body>
 </html>
